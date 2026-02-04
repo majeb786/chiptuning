@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tuning
+      POSTGRES_PASSWORD: tuning
+      POSTGRES_DB: tuning
+    ports:
+      - "5432:5432"
+    volumes:
+      - tuning_db:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://tuning:tuning@db:5432/tuning
+      HOST: 0.0.0.0
+      PORT: 8080
+      ALLOWED_ORIGIN: "*"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  tuning_db:

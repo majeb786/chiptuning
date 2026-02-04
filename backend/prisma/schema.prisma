@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Brand {
+  id      String  @id @default(uuid()) @db.Uuid
+  name    String
+  logoUrl String? @map("logo_url")
+  models  Model[]
+
+  @@map("brands")
+}
+
+model Model {
+  id      String @id @default(uuid()) @db.Uuid
+  brandId String @db.Uuid
+  name    String
+  brand   Brand  @relation(fields: [brandId], references: [id])
+  builds  Build[]
+
+  @@map("models")
+}
+
+model Build {
+  id       String  @id @default(uuid()) @db.Uuid
+  modelId  String  @db.Uuid
+  name     String
+  yearFrom Int?    @map("year_from")
+  yearTo   Int?    @map("year_to")
+  model    Model   @relation(fields: [modelId], references: [id])
+  engines  Engine[]
+
+  @@map("builds")
+}
+
+model Engine {
+  id               String       @id @default(uuid()) @db.Uuid
+  buildId          String       @db.Uuid
+  name             String
+  engineCode       String       @map("engine_code")
+  fuelType         String?      @map("fuel_type")
+  displacementCc   Int?         @map("displacement_cc")
+  ecu              String?
+  compressionRatio String?      @map("compression_ratio")
+  boreMm           Float?       @map("bore_mm")
+  strokeMm         Float?       @map("stroke_mm")
+  turboType        String?      @map("turbo_type")
+  engineNumber     String?      @map("engine_number")
+  build            Build        @relation(fields: [buildId], references: [id])
+  stages           Stage[]
+  readMethods      ReadMethod[]
+  options          Option[]
+  leads            Lead[]
+
+  @@map("engines")
+}
+
+model Stage {
+  id         String  @id @default(uuid()) @db.Uuid
+  engineId   String  @db.Uuid
+  name       String
+  stockHp    Int     @map("stock_hp")
+  tunedHp    Int     @map("tuned_hp")
+  stockNm    Int     @map("stock_nm")
+  tunedNm    Int     @map("tuned_nm")
+  tuningType String  @map("tuning_type")
+  method     String
+  priceCents Int?    @map("price_cents")
+  notes      String?
+  engine     Engine  @relation(fields: [engineId], references: [id])
+  leads      Lead[]
+
+  @@map("stages")
+}
+
+model ReadMethod {
+  id       String @id @default(uuid()) @db.Uuid
+  engineId String @db.Uuid
+  name     String
+  engine   Engine @relation(fields: [engineId], references: [id])
+
+  @@map("read_methods")
+}
+
+model Option {
+  id        String  @id @default(uuid()) @db.Uuid
+  engineId  String  @db.Uuid
+  name      String
+  category  String
+  isEnabled Boolean @default(true) @map("is_enabled")
+  engine    Engine  @relation(fields: [engineId], references: [id])
+
+  @@map("options")
+}
+
+model Lead {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  engineId  String   @db.Uuid
+  stageId   String   @db.Uuid
+  name      String
+  email     String
+  phone     String?
+  message   String?
+  consent   Boolean
+  metaJson  Json     @map("meta_json")
+  engine    Engine   @relation(fields: [engineId], references: [id])
+  stage     Stage    @relation(fields: [stageId], references: [id])
+
+  @@map("leads")
+}

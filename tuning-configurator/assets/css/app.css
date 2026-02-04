@@ -1,0 +1,105 @@
+#tuning-configurator {
+  --tc-primary: #0f172a;
+  --tc-accent: #2563eb;
+  --tc-muted: #64748b;
+  --tc-border: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+#tuning-configurator .tc-configurator {
+  border: 1px solid var(--tc-border);
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+#tuning-configurator .tc-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#tuning-configurator label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: var(--tc-primary);
+  gap: 6px;
+}
+
+#tuning-configurator select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--tc-border);
+  background: #fff;
+}
+
+#tuning-configurator .tc-card {
+  border: 1px solid var(--tc-border);
+  border-radius: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  margin-bottom: 16px;
+}
+
+#tuning-configurator .tc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+#tuning-configurator .tc-table th,
+#tuning-configurator .tc-table td {
+  border-bottom: 1px solid var(--tc-border);
+  padding: 8px 6px;
+  text-align: left;
+}
+
+#tuning-configurator .tc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+#tuning-configurator .tc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+
+#tuning-configurator .tc-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+#tuning-configurator .tc-badge {
+  background: #e0e7ff;
+  color: var(--tc-accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#tuning-configurator .tc-muted {
+  color: var(--tc-muted);
+  font-size: 13px;
+}
+
+#tuning-configurator .tc-empty {
+  color: var(--tc-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  #tuning-configurator .tc-configurator {
+    padding: 16px;
+  }
+}

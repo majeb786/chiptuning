@@ -1,0 +1,23 @@
+{
+  "name": "tuning-configurator-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --enable-source-maps ./apps/api/node_modules/.bin/tsx watch apps/api/src/index.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "seed": "tsx scripts/seed.ts",
+    "import": "tsx scripts/import-csv.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "prisma": "^5.17.0",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.3"
+  }
+}
