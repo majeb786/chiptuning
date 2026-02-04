@@ -1,0 +1,2 @@
+id,build_id,name,engine_code,fuel_type,displacement_cc,ecu,compression_ratio,bore_mm,stroke_mm,turbo_type,engine_number
+44444444-4444-4444-4444-444444444444,33333333-3333-3333-3333-333333333333,2.0 TFSI,EA888,Petrol,1984,Bosch MED,9.6:1,82.5,92.8,Twin-scroll,EA888-Gen3

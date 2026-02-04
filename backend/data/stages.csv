@@ -1,0 +1,2 @@
+id,engine_id,name,stock_hp,tuned_hp,stock_nm,tuned_nm,tuning_type,method,price_cents,notes
+55555555-5555-5555-5555-555555555555,44444444-4444-4444-4444-444444444444,Stage 1,190,245,320,390,ECU,OBD,49900,Optimized for 98 RON fuel
